@@ -1,0 +1,26 @@
+﻿@page "/"
+
+<PageTitle>File</PageTitle>
+
+<h1>File Upload</h1>
+
+@* Check for dropdiv class in site.css file  *@
+<div class="dropdiv @dropClass">
+    Drag and drop your files here or click to open file loading dialogue...
+    <InputFile id="inputDrop"
+               OnChange="OnInputFileChange"
+               @ondragenter="HandleDragEnter"
+               @ondragleave="HandleDragLeave"
+               multiple />
+
+    @if (urls.Count > 0)
+    {
+        foreach (var url in urls)
+        {
+            <br />
+            <a href="@url" download>@url</a>
+        }
+    }
+</div>
+
+
