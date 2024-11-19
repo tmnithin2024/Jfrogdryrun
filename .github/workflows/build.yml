@@ -11,31 +11,31 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+
     - name: Restore dependencies
       run: dotnet restore
+
     - name: Build
       run: dotnet build --no-restore
+
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
     - name: Publish
       run: dotnet publish --configuration Release --output ./publish
+
     - name: Upload to JFrog Artifactory
-      uses: jfrog-actions/jfrog-cli-action@v1
-      with:
-         jfrog-cli: '1.48.0' # Specify the JFrog CLI version
-         command: 'rt u'
-         args: 'my-repo/my-application/ --flat=false ./publish/*'
-         build-name: 'your-build-name'
-         build-number: '1'
-         jfrog-platform-url: 'https://tmhome.jfrog.io/artifactory/api/nuget/qajfrog-demodryrun'
-         user: '${{ secrets.JFROG_USER }}'
-         password: '${{ secrets.JFROG_PASSWORD }}'
+      run: jfrog rt u --url='https://tmhome.jfrog.io/artifactory/api/nuget/qajfrog-demodryrun' \
+                      --user='${{ secrets.JFROG_USER }}' \
+                      --password='${{ secrets.JFROG_PASSWORD }}' \
+                      ./publish/* 'qajfrog-demodryrun/' --flat=false
+
