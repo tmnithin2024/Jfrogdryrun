@@ -29,6 +29,8 @@ jobs:
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Ensure publish directory exists 
+      run: mkdir -p ./publish
 
     - name: Publish
       run: dotnet publish --configuration Release --output ./publish
