@@ -33,9 +33,13 @@ jobs:
     - name: Publish
       run: dotnet publish --configuration Release --output ./publish
 
+    - name: Set up JFrog CLI
+      uses: jfrog/setup-jfrog-cli@v1
+      with:
+        version: '1.48.0'
+
     - name: Upload to JFrog Artifactory
       run: jfrog rt u --url='https://tmhome.jfrog.io/artifactory/api/nuget/qajfrog-demodryrun' \
                       --user='${{ secrets.JFROG_USER }}' \
                       --password='${{ secrets.JFROG_PASSWORD }}' \
                       ./publish/* 'qajfrog-demodryrun/' --flat=false
-
