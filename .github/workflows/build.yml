@@ -42,7 +42,4 @@ jobs:
         version: '1.48.0'
 
     - name: Upload to JFrog Artifactory
-      run: jfrog rt u ./publish/* qajfrog-demodryrun/ --url='https://tmhome.jfrog.io/artifactory/api/nuget/qajfrog-demodryrun' \
-                      --user='${{ secrets.JFROG_USER }}' \
-                      --password='${{ secrets.JFROG_PASSWORD }}' \
-                      --flat=false
+      run: jfrog rt u "publish/*" "qajfrog-demodryrun/" --url=https://tmhome.jfrog.io/artifactory --user=${{ secrets.JFROG_USER }} --password=${{ secrets.JFROG_PASSWORD }} --flat=false
