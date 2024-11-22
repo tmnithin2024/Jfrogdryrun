@@ -39,7 +39,7 @@ jobs:
     - name: Set up JFrog CLI
       uses: jfrog/setup-jfrog-cli@v1
       with:
-        version: '1.48.0'
+        version: '2.71.5'
 
     - name: Upload to JFrog Artifactory
       run: jfrog rt u "publish/*" "qajfrog-demodryrun/" --url=https://tmhome.jfrog.io/artifactory --user=${{ secrets.JFROG_USER }} --password=${{ secrets.JFROG_PASSWORD }} --flat=false
